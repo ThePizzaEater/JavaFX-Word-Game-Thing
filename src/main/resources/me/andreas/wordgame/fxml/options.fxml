@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.andreas.wordgame.controller.SettingsController">
+   <children>
+      <TabPane fx:id="tabPane" prefHeight="520.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="General">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="15.0" layoutY="60.0" text="Word Duration:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="In Seconds" />
+                           </tooltip>
+                        </Label>
+                        <TextField fx:id="roundDuration" layoutX="200.0" layoutY="60.0">
+                           <tooltip>
+                              <Tooltip text="In Seconds" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="15.0" layoutY="15.0" text="Words per round:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="scrambleRounds" layoutX="200.0" layoutY="15.0" />
+                        <Button layoutX="326.0" layoutY="452.0" mnemonicParsing="false" onAction="#applySettings" text="Apply" />
+                        <Label layoutX="15.0" layoutY="105.0" text="Always Next Word">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Always go to the next word, even if answer is wrong" />
+                           </tooltip>
+                        </Label>
+                        <RadioButton fx:id="alwaysNext" layoutX="200.0" layoutY="105.0" mnemonicParsing="false">
+                           <tooltip>
+                              <Tooltip text="Always go to the next word, even if answer is wrong" />
+                           </tooltip>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </RadioButton>
+                        <Label layoutX="15.0" layoutY="330.0" text="Cheat Mode">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Always prints the correct word in console" />
+                           </tooltip>
+                        </Label>
+                        <RadioButton fx:id="cheatButton" layoutX="200.0" layoutY="330.0" mnemonicParsing="false">
+                           <tooltip>
+                              <Tooltip text="Always prints the correct word in console" />
+                           </tooltip>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </RadioButton>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Unscramble">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="15.0" layoutY="15.0" text="Max Scramble Attempts:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="maxScrambleAttempts" layoutX="200.0" layoutY="15.0" />
+                        <Button fx:id="apply" layoutX="297.0" layoutY="452.0" mnemonicParsing="false" onAction="#applySettings" text="Apply" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
