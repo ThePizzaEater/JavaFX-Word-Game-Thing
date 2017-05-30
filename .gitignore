@@ -15,7 +15,7 @@
 hs_err_pid*
 target/
 .idea/
-words.txt
-config.properties
+/words.txt
+/config.properties
 JavaFX-Word-Game-Thing.iml
 JavaFX.iml
