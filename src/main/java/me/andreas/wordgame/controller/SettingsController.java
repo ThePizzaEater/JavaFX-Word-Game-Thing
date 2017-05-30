@@ -58,7 +58,7 @@ public class SettingsController implements Initializable{
 
 		makeTextFieldNumeric(maxScrambleAttempts, 3, Integer.MAX_VALUE);
 		makeTextFieldNumeric(scrambleRounds, 1, 99);
-		makeTextFieldNumeric(roundDuration, 1, 9999);
+		makeTextFieldNumeric(roundDuration, 1, Integer.MAX_VALUE);
 
 		setCurrentValues();
 		settings = Main.getInstance().getSettings();

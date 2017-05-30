@@ -9,6 +9,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Settings">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#resetStats" text="Reset Stats" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#openSettings" text="Options" />
             </items>
           </Menu>

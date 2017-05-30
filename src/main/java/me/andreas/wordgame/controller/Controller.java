@@ -52,6 +52,11 @@ public class Controller implements Initializable{
 		else unscrambleNode.setExpanded(false);
 	}
 
+	public void resetStats(){
+		unscrambleNode.getChildren().clear();
+		normalNode.getChildren().clear();
+	}
+
 	public void openSettings(){
 		main.showOptionsWindow();
 	}
