@@ -15,6 +15,8 @@ public class Settings {
 
 	private static DecimalFormat decimalFormat;
 
+	private static String wordsFilePath = "words.txt";
+
 	private Properties properties;
 	private File file;
 
@@ -105,5 +107,9 @@ public class Settings {
 
 	public static boolean shouldCheat() {
 		return CHEAT;
+	}
+
+	public static String getWordsFilePath() {
+		return wordsFilePath;
 	}
 }

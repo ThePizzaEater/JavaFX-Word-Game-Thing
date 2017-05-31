@@ -12,8 +12,9 @@ public class WordScrambler {
 
 	public String scramble(String word){
 		String result = word;
+		// Attempts to scramble the words up to a configurable amount of times, to reduce the chance of it not getting scrambled.
 		for(int x = 1; x <= Settings.getMaxScrambleAttempts(); x++){
-			result = scrambleWord(word);
+			result = scrambleWord(word, random);
 			if(!result.equalsIgnoreCase(word)){
 				break;
 			}
@@ -21,7 +22,8 @@ public class WordScrambler {
 		return result;
 	}
 
-	private String scrambleWord(String word){
+	// https://stackoverflow.com/a/20589105
+	private String scrambleWord(String word, Random random){
 		char letters[] = word.toCharArray();
 		for(int x = 0; x < letters.length-1; x++){
 			int j = random.nextInt(letters.length - 1);

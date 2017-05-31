@@ -31,12 +31,16 @@ public class SettingsController implements Initializable{
 
 	public void applySettings(){
 		try{
+
 			int maxScrambleAttempts = Integer.valueOf(this.maxScrambleAttempts.getText());
 			int scrambleRounds = Integer.valueOf(this.scrambleRounds.getText());
 			int roundDuration = Integer.valueOf(this.roundDuration.getText());
+
 			boolean alwaysNext = this.alwaysNext.isSelected();
 			boolean cheat = this.cheatButton.isSelected();
+
 			settings.updateSettings(maxScrambleAttempts, scrambleRounds, roundDuration, alwaysNext, cheat);
+
 		}catch (NumberFormatException e){
 			setCurrentValues();
 		}
@@ -44,6 +48,7 @@ public class SettingsController implements Initializable{
 		stage.close();
 	}
 
+	// Sets the settings in the options window to their current values.
 	private void setCurrentValues(){
 		maxScrambleAttempts.setText(Integer.toString(Settings.getMaxScrambleAttempts()));
 		scrambleRounds.setText(Integer.toString(Settings.getWordsPerRound()));
@@ -66,6 +71,7 @@ public class SettingsController implements Initializable{
 
 	private void makeTextFieldNumeric(TextField field, Integer min, Integer max){
 		field.textProperty().addListener((observable, oldValue, newValue) -> {
+			// got the regex from here: https://stackoverflow.com/a/30796829
 			if(!newValue.matches("\\d*")){
 				field.setText(newValue.replaceAll("[^\\d]",""));
 			}
@@ -73,7 +79,9 @@ public class SettingsController implements Initializable{
 
 			Integer input = null;
 			try{
+				// If this throws NumberFormatException it will most likely be because the number is too high for an Integer.
 				input = Integer.valueOf(field.getText());
+
 			}catch (NumberFormatException ignored){}
 
 			if(input == null || (max != null && input > max)) field.setText(max.toString());

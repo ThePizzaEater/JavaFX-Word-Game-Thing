@@ -11,6 +11,7 @@ import me.andreas.wordgame.util.GameType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class GameController implements Initializable{
 
@@ -22,6 +23,8 @@ public class GameController implements Initializable{
 
 	private Main main;
 
+	private Logger logger = Logger.getLogger(getClass().getName());
+
 	public void updateSomeText(GameType gameType){
 		switch (gameType){
 			case NORMAL:
@@ -29,6 +32,9 @@ public class GameController implements Initializable{
 				break;
 			case UNSCRAMBLE:
 				someText.setText("Unscramble:");
+				break;
+			default:
+				logger.info("Unsupported GameType: " + gameType);
 				break;
 		}
 	}
@@ -39,6 +45,8 @@ public class GameController implements Initializable{
 	}
 
 	public void resetInput(){
+		// Check if method is being called on ui thread, if its not, queue the task on the ui thread.
+		// Gets called from another thread if the round time expires.
 		if(Platform.isFxApplicationThread()){
 			clearInput();
 		}else{
@@ -54,6 +62,7 @@ public class GameController implements Initializable{
 	}
 
 	public void setWord(String word){
+		// same as resetInput
 		if(Platform.isFxApplicationThread()){
 			this.word.setText(word);
 		}else{
@@ -62,6 +71,7 @@ public class GameController implements Initializable{
 	}
 
 	public void setSecondsLeft(String secondsLeft1){
+		// same as resetInput
 		if(Platform.isFxApplicationThread()){
 			secondsLeft.setText(secondsLeft1);
 		}else{

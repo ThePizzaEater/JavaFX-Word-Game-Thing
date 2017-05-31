@@ -28,10 +28,12 @@ public class Controller implements Initializable{
 		if (choiceBox.getSelectionModel().getSelectedItem().equalsIgnoreCase("Unscramble")) {
 			main.startGame(GameType.UNSCRAMBLE);
 		}else{
+			// Only other option is 'NORMAL' for now.
 			main.startGame(GameType.NORMAL);
 		}
 	}
 
+	// Adds a new item to the TreeView with the Stats.
 	public void setStats(Stats stats){
 		TreeItem<String> rootNode = stats.getGameType() == GameType.UNSCRAMBLE ? unscrambleNode : normalNode;
 
@@ -43,7 +45,9 @@ public class Controller implements Initializable{
 		roundStats.getChildren().add(new TreeItem<>());
 
 		stats.getAllWords().forEach(w -> roundStats.getChildren().add(new TreeItem<>(w.getWord() + ": " + w.getDisplayTime())));
+
 		roundStats.setExpanded(true);
+
 		rootNode.getChildren().forEach(t -> t.setExpanded(false));
 		rootNode.getChildren().add(roundStats);
 		rootNode.setExpanded(true);
@@ -69,16 +73,19 @@ public class Controller implements Initializable{
 		ArrayList<String> types = new ArrayList<>();
 		types.add("Unscramble");
 		types.add("Normal");
+
 		choiceBox.setItems(FXCollections.observableArrayList(types));
 		choiceBox.getSelectionModel().selectFirst();
 
 		TreeItem<String> rootNode = new TreeItem<>();
+
 		unscrambleNode = new TreeItem<>("Unscramble");
 		normalNode = new TreeItem<>("Normal");
 		rootNode.getChildren().addAll(unscrambleNode, normalNode);
 
 		statsView.setRoot(rootNode);
 		statsView.setShowRoot(false);
+
 		rootNode.setExpanded(true);
 	}
 }

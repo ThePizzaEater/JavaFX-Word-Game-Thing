@@ -35,9 +35,10 @@ public class Main extends Application {
 	private NormalGame game;
 	private Settings settings;
 
+	private Logger logger = Logger.getLogger(getClass().getName());
+
 	@Override
     public void start(Stage primaryStage) throws Exception{
-		Logger logger = Logger.getLogger(getClass().getName());
     	try {
 			instance = this;
 			this.primaryStage = primaryStage;
@@ -64,6 +65,7 @@ public class Main extends Application {
 				game.start();
 				break;
 			default:
+				logger.info("Tried to start unsupported GameType: " + gameType);
 				break;
 		}
 	}
@@ -79,6 +81,7 @@ public class Main extends Application {
 				gameController = loader.getController();
 
 			}catch (IOException e) {
+				logger.info("Failed to load game scene.");
 				e.printStackTrace();
 			}
 		}
@@ -86,6 +89,8 @@ public class Main extends Application {
 	}
 
 	public void showStartupScene(Stats stats){
+		// Check if method is being called on ui thread, if its not, queue the task on the ui thread.
+		// Gets called from another thread if the last rounds time expires.
     	if(Platform.isFxApplicationThread()){
     		showStartup(stats);
 		}else{
@@ -108,6 +113,7 @@ public class Main extends Application {
 				startScene = new Scene(root, 1080, 720);
 				controller = loader.getController();
 			} catch (IOException e) {
+				logger.info("Failed to load startup scene.");
 				e.printStackTrace();
 			}
 		}
@@ -131,6 +137,7 @@ public class Main extends Application {
 				settingsStage.initModality(Modality.APPLICATION_MODAL);
 				settingsStage.initOwner(primaryStage);
 			} catch (IOException e) {
+				logger.info("Failed to load options window.");
 				e.printStackTrace();
 			}
 		}

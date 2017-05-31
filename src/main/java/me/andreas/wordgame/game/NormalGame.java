@@ -38,14 +38,14 @@ public class NormalGame {
 	private GameController controller;
 
 	private Stats stats;
-	private Logger logger;
 
 	private DecimalFormat decimalFormat;
 	GameType gameType;
 
+	private Logger logger = Logger.getLogger(getClass().getName());
+
 	public NormalGame(GameController gameController){
 		main = Main.getInstance();
-		logger = Logger.getLogger(getClass().getName());
 
 		if(allWords == null) allWords = new ListFromFile().getWordsFromFile();
 		if(words == null) words = new LinkedList<>();
@@ -59,6 +59,7 @@ public class NormalGame {
 		stats = new Stats(gameType);
 		round = 1;
 		controller.updateSomeText(gameType);
+
 		startRound();
 	}
 
