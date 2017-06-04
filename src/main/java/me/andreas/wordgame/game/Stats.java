@@ -14,19 +14,19 @@ public class Stats {
 
 	private GameType gameType;
 
-	Stats(GameType gameType) {
+	public Stats(GameType gameType) {
 		this.gameType = gameType;
 		words = 0;
 
-		allWords = new TreeSet<>((o1, o2) ->{
-			if(o1.getTime() == 0) return 1;
+		allWords = new TreeSet<>((o1, o2) -> {
+			if(o1.getTime() == 0 || o1.getTime() == o2.getTime()) return 1;
 			else if(o2.getTime() == 0) return -1;
 
 			return ((Long)o1.getTime()).compareTo((Long)o2.getTime());
 		});
 	}
 
-	void completedWord(String word, long time){
+	public void completedWord(String word, long time){
 		words++;
 		allWords.add(new WordStats(word, time));
 	}

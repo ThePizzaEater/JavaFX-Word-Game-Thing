@@ -19,3 +19,4 @@ target/
 /config.properties
 JavaFX-Word-Game-Thing.iml
 JavaFX.iml
+src/test/
