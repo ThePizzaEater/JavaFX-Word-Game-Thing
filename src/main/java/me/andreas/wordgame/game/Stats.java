@@ -31,7 +31,7 @@ public class Stats {
 		allWords.add(new WordStats(word, time));
 	}
 
-	void failedWord(String word){
+	public void failedWord(String word){
 		allWords.add(new WordStats(word, 0));
 	}
 

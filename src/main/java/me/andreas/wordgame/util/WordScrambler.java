@@ -23,7 +23,7 @@ public class WordScrambler {
 	}
 
 	// https://stackoverflow.com/a/20589105
-	private String scrambleWord(String word, Random random){
+	public String scrambleWord(String word, Random random){
 		char letters[] = word.toCharArray();
 		for(int x = 0; x < letters.length-1; x++){
 			int j = random.nextInt(letters.length - 1);
