@@ -73,9 +73,7 @@ public class Main extends Application {
 	private void showGameScene() {
 		if (gameController == null || gameScene == null){
 			try {
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(getClass().getResource("fxml/game.fxml"));
-				loader.setClassLoader(getClass().getClassLoader());
+				FXMLLoader loader = loadFxml("game.fxml");
 				Parent root = loader.load();
 				gameScene = new Scene(root, 1080, 720);
 				gameController = loader.getController();
@@ -106,9 +104,7 @@ public class Main extends Application {
 	private void showStartupScene(){
 		if(startScene == null || controller == null){
 			try{
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(getClass().getResource("fxml/main.fxml"));
-				loader.setClassLoader(getClass().getClassLoader());
+				FXMLLoader loader = loadFxml("main.fxml");
 				Parent root = loader.load();
 				startScene = new Scene(root, 1080, 720);
 				controller = loader.getController();
@@ -123,9 +119,7 @@ public class Main extends Application {
 	public void showOptionsWindow(){
 		if(settingsStage == null || settingsScene == null){
 			try{
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(getClass().getResource("fxml/options.fxml"));
-				loader.setClassLoader(getClass().getClassLoader());
+				FXMLLoader loader = loadFxml("options.fxml");
 				Parent root = loader.load();
 
 				settingsScene = new Scene(root, 400, 520);
@@ -142,6 +136,13 @@ public class Main extends Application {
 			}
 		}
 		settingsStage.show();
+	}
+
+	private FXMLLoader loadFxml(String fileName){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("fxml/" + fileName));
+		loader.setClassLoader(Main.class.getClassLoader());
+		return loader;
 	}
 
 	public Settings getSettings(){
