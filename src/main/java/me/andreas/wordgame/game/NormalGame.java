@@ -69,7 +69,7 @@ public class NormalGame {
 
 			if(words == null || words.peek() == null){
 				Collections.shuffle(allWords);
-				allWords.forEach(s -> words.add(s));
+				words.addAll(allWords);
 			}
 			setNewWord();
 			cancelRunningTasks();

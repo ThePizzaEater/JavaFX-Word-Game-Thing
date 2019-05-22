@@ -2,4 +2,4 @@
 
 
 ## Compiling
-use `mvn jfx:jar` to compile, find the output jar in `target/jfx/app/`
+use `mvn clean package` to compile, find the output jar in `target`

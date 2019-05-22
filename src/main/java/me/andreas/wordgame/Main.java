@@ -12,6 +12,7 @@ import me.andreas.wordgame.controller.GameController;
 import me.andreas.wordgame.game.NormalGame;
 import me.andreas.wordgame.game.Stats;
 import me.andreas.wordgame.game.UnscrambleGame;
+import me.andreas.wordgame.ui.UI;
 import me.andreas.wordgame.util.Settings;
 import me.andreas.wordgame.util.GameType;
 
@@ -25,12 +26,10 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private Stage settingsStage;
 
-	private Scene startScene;
-	private Scene gameScene;
 	private Scene settingsScene;
 
-	private GameController gameController;
-	private Controller controller;
+	private UI<GameController> gameUI;
+	private UI<Controller> startUI;
 
 	private NormalGame game;
 	private Settings settings;
@@ -38,11 +37,15 @@ public class Main extends Application {
 	private Logger logger = Logger.getLogger(getClass().getName());
 
 	@Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage){
     	try {
 			instance = this;
 			this.primaryStage = primaryStage;
 			settings = new Settings();
+
+			startUI = new UI<>("main.fxml");
+			gameUI = new UI<>("game.fxml");
+
 			showStartupScene();
 			primaryStage.setTitle("Word Game Thing");
 			primaryStage.show();
@@ -56,12 +59,12 @@ public class Main extends Application {
 		switch (gameType){
 			case UNSCRAMBLE:
 				showGameScene();
-				game = new UnscrambleGame(gameController);
+				game = new UnscrambleGame(gameUI.getController());
 				game.start();
 				break;
 			case NORMAL:
 				showGameScene();
-				game = new NormalGame(gameController);
+				game = new NormalGame(gameUI.getController());
 				game.start();
 				break;
 			default:
@@ -70,20 +73,12 @@ public class Main extends Application {
 		}
 	}
 
-	private void showGameScene() {
-		if (gameController == null || gameScene == null){
-			try {
-				FXMLLoader loader = loadFxml("game.fxml");
-				Parent root = loader.load();
-				gameScene = new Scene(root, 1080, 720);
-				gameController = loader.getController();
+	private void showStartupScene(){
+		startUI.show(primaryStage);
+	}
 
-			}catch (IOException e) {
-				logger.info("Failed to load game scene.");
-				e.printStackTrace();
-			}
-		}
-		primaryStage.setScene(gameScene);
+	private void showGameScene() {
+		gameUI.show(primaryStage);
 	}
 
 	public void showStartupScene(Stats stats){
@@ -98,28 +93,13 @@ public class Main extends Application {
 
 	private void showStartup(Stats stats){
 		showStartupScene();
-		controller.setStats(stats);
-	}
-
-	private void showStartupScene(){
-		if(startScene == null || controller == null){
-			try{
-				FXMLLoader loader = loadFxml("main.fxml");
-				Parent root = loader.load();
-				startScene = new Scene(root, 1080, 720);
-				controller = loader.getController();
-			} catch (IOException e) {
-				logger.info("Failed to load startup scene.");
-				e.printStackTrace();
-			}
-		}
-		primaryStage.setScene(startScene);
+		startUI.getController().setStats(stats);
 	}
 
 	public void showOptionsWindow(){
 		if(settingsStage == null || settingsScene == null){
 			try{
-				FXMLLoader loader = loadFxml("options.fxml");
+				FXMLLoader loader = UI.loadFxml("options.fxml");
 				Parent root = loader.load();
 
 				settingsScene = new Scene(root, 400, 520);
@@ -136,13 +116,6 @@ public class Main extends Application {
 			}
 		}
 		settingsStage.show();
-	}
-
-	private FXMLLoader loadFxml(String fileName){
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("fxml/" + fileName));
-		loader.setClassLoader(Main.class.getClassLoader());
-		return loader;
 	}
 
 	public Settings getSettings(){
